@@ -8,7 +8,9 @@ import me.wincho.choui.rendersystem.CPage;
 import me.wincho.choui.rendersystem.CWindow;
 import uninstaller.page.UnInstallPage;
 
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.net.URISyntaxException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
@@ -35,7 +37,8 @@ public class Main {
     }
 
     private static void loadProgramData() throws URISyntaxException, IOException {
-        data = JsonParser.parseReader(Files.newBufferedReader(Paths.get(Objects.requireNonNull(Main.class.getResource("/data.json")).toURI()))).getAsJsonObject();
+        data = JsonParser.parseReader(new BufferedReader(new InputStreamReader(
+                Objects.requireNonNull(Main.class.getResourceAsStream("/data"))))).getAsJsonObject();
     }
 
     public static void cancel(CPage page) {
