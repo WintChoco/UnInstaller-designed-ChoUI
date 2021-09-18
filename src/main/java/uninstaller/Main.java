@@ -38,7 +38,7 @@ public class Main {
 
     private static void loadProgramData() throws URISyntaxException, IOException {
         data = JsonParser.parseReader(new BufferedReader(new InputStreamReader(
-                Objects.requireNonNull(Main.class.getResourceAsStream("/data"))))).getAsJsonObject();
+                Objects.requireNonNull(Main.class.getResourceAsStream("/data.json"))))).getAsJsonObject();
     }
 
     public static void cancel(CPage page) {
