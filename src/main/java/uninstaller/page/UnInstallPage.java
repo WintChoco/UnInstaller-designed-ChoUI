@@ -16,7 +16,6 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.concurrent.CompletableFuture;
-import java.util.concurrent.atomic.AtomicInteger;
 
 public class UnInstallPage extends CPage {
     public UnInstallPage(CWindow window) {
@@ -42,7 +41,7 @@ public class UnInstallPage extends CPage {
     }
 
     private void delete(Path dir) {
-        if(dir.toFile().exists()){
+        if (dir.toFile().exists()) {
             File[] deleteFolderList = dir.toFile().listFiles();
 
             for (File file : deleteFolderList) {
@@ -60,6 +59,6 @@ public class UnInstallPage extends CPage {
     @Override
     public void render() {
         super.render();
-        RenderSystem.drawString("Installing..", 30, 40, Color.BLACK, FontUtils.DEFAULT_FONT);
+        RenderSystem.drawString("Uninstalling..", 30, 40, Color.BLACK, FontUtils.DEFAULT_FONT);
     }
 }
