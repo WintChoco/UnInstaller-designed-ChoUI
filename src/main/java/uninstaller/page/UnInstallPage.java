@@ -8,6 +8,7 @@ import me.wincho.choui.widget.AnimatedIconWidget;
 import uninstaller.Main;
 
 import java.awt.Color;
+import java.io.File;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -41,26 +42,18 @@ public class UnInstallPage extends CPage {
     }
 
     private void delete(Path dir) {
-        try {
-            Files.list(dir).forEach(path -> {
-                try {
-                    if (Files.isDirectory(path)) {
-                        AtomicInteger i = new AtomicInteger();
-                        Files.list(path).forEach(path1 -> i.set(1));
-                        if (i.get() == 1) {
-                            delete(path);
-                        } else {
-                            Files.delete(path);
-                        }
-                    } else {
-                        Files.delete(path);
-                    }
-                } catch (IOException e) {
-                    e.printStackTrace();
+        if(dir.toFile().exists()){
+            File[] deleteFolderList = dir.toFile().listFiles();
+
+            for (File file : deleteFolderList) {
+                if (file.isFile()) {
+                    file.delete();
+                } else {
+                    delete(file.toPath());
                 }
-            });
-        } catch (IOException e) {
-            e.printStackTrace();
+                file.delete();
+            }
+            dir.toFile().delete();
         }
     }
 
